@@ -93,6 +93,43 @@ window.__SYC = {"buddies":{"pip":"<g><ellipse cx=\"60\" cy=\"111\" rx=\"32\" ry=
     return html;
   }
 
+  /* ------------------------------------------ prefilled from the app's link */
+  // The app opens this page with ?name=&buddy=&theme=&age=&chores=Title~icon|Title~icon so a child's chart is ready to print.
+  function applyLink(state, kind) {
+    var q;
+    try {
+      q = new URLSearchParams(window.location.search);
+    } catch (e) {
+      return;
+    }
+    var name = q.get("name");
+    if (name) state.name = name.slice(0, 16);
+    var buddy = q.get("buddy");
+    if (buddy && buddyNames[buddy]) state.buddy = buddy;
+    var theme = q.get("theme");
+    if (theme && themes[theme]) state.theme = theme;
+    var age = q.get("age");
+    if (age && D.ages[age]) state.age = age;
+    var goal = q.get("goal");
+    if (goal) state.goal = goal.slice(0, 30);
+    var reward = q.get("reward");
+    if (reward) state.reward = reward.slice(0, 30);
+    var chores = q.get("chores");
+    if (kind === "chores" && chores) {
+      var list = chores
+        .split("|")
+        .map(function (item) {
+          var parts = item.split("~");
+          var title = (parts[0] || "").trim().slice(0, 28);
+          var icon = parts[1] && D.icons[parts[1]] ? parts[1] : "star";
+          return title ? { title: title, icon: icon } : null;
+        })
+        .filter(Boolean)
+        .slice(0, maxChores);
+      if (list.length) state.chores = list;
+    }
+  }
+
   /* --------------------------------------------------------------- controls */
   function mount(root) {
     var kind = root.getAttribute("data-kind") || "chores";
@@ -118,6 +155,7 @@ window.__SYC = {"buddies":{"pip":"<g><ellipse cx=\"60\" cy=\"111\" rx=\"32\" ry=
       });
     }
     if (kind === "chores") pickDefaults();
+    applyLink(state, kind);
 
     var controls = document.createElement("div");
     controls.className = "maker-controls";
