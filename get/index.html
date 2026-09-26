@@ -5,11 +5,44 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="robots" content="noindex" />
     <title>Get Score Your Chores</title>
-    <link rel="canonical" href="https://apps.apple.com/gb/app/scoreyourchores/id6795851917" />
-    <meta http-equiv="refresh" content="0; url=https://apps.apple.com/gb/app/scoreyourchores/id6795851917" />
-    <script>location.replace("https://apps.apple.com/gb/app/scoreyourchores/id6795851917");</script>
+    <link rel="canonical" href="https://scoreyourchores.com/" />
+    <script>
+      (function () {
+        var android = /android/i.test(navigator.userAgent);
+        if (!android) location.replace("https://apps.apple.com/gb/app/scoreyourchores/id6795851917");
+        else if (false) location.replace("https://play.google.com/store/apps/details?id=com.scoreyourchores.app");
+        else document.documentElement.className = "android";
+      })();
+    </script>
+    <style>
+      body { margin: 0; font-family: system-ui, -apple-system, "Segoe UI", sans-serif; background: #fff7ec; color: #2b2233; }
+      main { max-width: 440px; margin: 0 auto; padding: 32px 20px 48px; }
+      h1 { font-size: 28px; line-height: 1.15; margin: 0 0 12px; }
+      p { font-size: 17px; line-height: 1.5; margin: 0 0 16px; }
+      a.button { display: block; text-align: center; padding: 15px 18px; border-radius: 16px; font-weight: 800; text-decoration: none; margin: 0 0 12px; }
+      .primary { background: #ff7a2f; color: #fff; }
+      .secondary { background: #fff; color: #2b2233; border: 2px solid #eadfd2; }
+      .android-only { display: none; }
+      .android .android-only { display: block; }
+      .android .other { display: none; }
+      small { color: #6d6275; font-size: 14px; }
+    </style>
   </head>
-  <body style="font-family: system-ui, sans-serif; padding: 24px">
-    <p><a href="https://apps.apple.com/gb/app/scoreyourchores/id6795851917">Get Score Your Chores on the App Store</a></p>
+  <body>
+    <main>
+      <section class="android-only">
+        <h1>Score Your Chores is coming to Android</h1>
+        <p>We're testing the Android app with a small group of families right now. Want to be one of the first to try it, free?</p>
+        <p>Email us the Google account address you use on Google Play and we'll send you an invite.</p>
+        <a class="button primary" href="mailto:info@labiireatum.co.uk?subject=Android%20tester&body=Hi!%20I'd%20like%20to%20try%20Score%20Your%20Chores%20on%20Android.%20The%20Google%20account%20email%20I%20use%20on%20Google%20Play%20is%3A%20">Invite me to the Android test</a>
+        <a class="button secondary" href="/printable-chore-charts/">Print a free chore chart meanwhile</a>
+        <small>Score Your Chores is already available on iPhone.</small>
+      </section>
+      <section class="other">
+        <h1>Get Score Your Chores</h1>
+        <a class="button primary" href="https://apps.apple.com/gb/app/scoreyourchores/id6795851917">Download on the App Store</a>
+        <a class="button secondary" href="/">Visit scoreyourchores.com</a>
+      </section>
+    </main>
   </body>
 </html>
