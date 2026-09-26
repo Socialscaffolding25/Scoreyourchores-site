@@ -53,7 +53,7 @@ window.__SYC = {"buddies":{"pip":"<g><ellipse cx=\"60\" cy=\"111\" rx=\"32\" ry=
       '<div class="sheet sheet-landscape" style="--strong:' + t.strong + ";--main:" + t.main + ";--soft:" + t.soft + ";--page:" + t.page + ";--border:" + t.border + '">' +
       '<div class="sheet-head">' + buddySvg(s.buddy, "sheet-buddy") +
       '<div class="sheet-title"><p class="sheet-eyebrow">' + esc(buddyNames[s.buddy]) + " and " + (s.name.trim() ? esc(s.name.trim()) : "me") + "</p>" +
-      "<h2>" + possessive(s.name) + " Quest Chart</h2><p>Finish a quest, add a tick or a sticker. Fill a whole row for a perfect week!</p></div>" +
+      "<h2>" + possessive(s.name) + " " + esc(s.heading || "Quest Chart") + "</h2><p>" + esc(s.subline || "Finish a quest, add a tick or a sticker. Fill a whole row for a perfect week!") + "</p></div>" +
       '<div class="sheet-week"><span>Week of</span><i></i></div></div>' +
       '<div class="sheet-grid" style="--rowh:' + rowH + 'mm"><div class="grid-corner">Quest</div>';
     days.forEach(function (d) {
@@ -144,6 +144,8 @@ window.__SYC = {"buddies":{"pip":"<g><ellipse cx=\"60\" cy=\"111\" rx=\"32\" ry=
       goal: "",
       reward: "",
       squares: 10,
+      heading: root.getAttribute("data-heading") || "",
+      subline: root.getAttribute("data-subline") || "",
     };
     function suggestions() {
       return D.ages[state.age] ? D.ages[state.age].chores : [];
@@ -155,6 +157,13 @@ window.__SYC = {"buddies":{"pip":"<g><ellipse cx=\"60\" cy=\"111\" rx=\"32\" ry=
       });
     }
     if (kind === "chores") pickDefaults();
+    var preset = root.getAttribute("data-chores");
+    if (kind === "chores" && preset) {
+      state.chores = preset.split("|").map(function (item) {
+        var parts = item.split("~");
+        return { title: parts[0], icon: D.icons[parts[1]] ? parts[1] : "star" };
+      });
+    }
     applyLink(state, kind);
 
     var controls = document.createElement("div");
