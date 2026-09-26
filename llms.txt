@@ -1,0 +1,26 @@
+# Score Your Chores
+
+> Score Your Chores is a family chore chart and reward chart app for children aged about 3 to 12, made in the UK by Labii Reatum LTD. Each child wakes up their own cartoon Buddy and grows it by finishing chores ("quests"); parents approve finished quests in two taps and choose the rewards. It runs on one shared family phone with no child accounts, no ads and no tracking, and children never see prices. Free to start (two children, every core feature); an optional Plus subscription adds more children, photo proof, bonus outfits and past weekly results.
+
+Available on iPhone (App Store). An Android version is in Google Play review.
+
+## Key facts
+- Works on one shared family phone; each child has their own card and Buddy.
+- Parents approve chores, set rewards (screen time, choosing dinner, days out) and can track optional pocket money, which they hand over themselves. The app never moves real money.
+- Weekly "Family Cup" team goal and a Sunday Scores reveal with awards.
+- Grown-up PIN; kids never see prices or buy buttons.
+- Free printable chore charts and reward charts on the website, no sign-up.
+
+## Pages
+- [Home](https://scoreyourchores.com/): what the app does
+- [Free printable chore charts](https://scoreyourchores.com/printable-chore-charts/): personalised chart maker, print on A4
+- [Reward chart](https://scoreyourchores.com/reward-chart/): printable sticker chart
+- [Behaviour chart](https://scoreyourchores.com/behaviour-chart/): printable behaviour chart
+- [Chores by age](https://scoreyourchores.com/chores-for-kids-by-age/): age-appropriate chores from 3 to teenagers
+- [Chore ideas for kids](https://scoreyourchores.com/chore-ideas-for-kids/): 100+ chores by room and age
+- [Reward ideas for kids](https://scoreyourchores.com/reward-ideas-for-kids/): rewards that aren't sweets or money
+- [Pocket money by age (UK)](https://scoreyourchores.com/pocket-money-by-age/): 2026 UK averages by age
+- [How to choose a chore app](https://scoreyourchores.com/best-chore-apps-for-kids/): an honest guide
+- [Support](https://scoreyourchores.com/support/) and [Privacy](https://scoreyourchores.com/privacy/)
+
+Contact: info@labiireatum.co.uk
