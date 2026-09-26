@@ -21,6 +21,11 @@ window.__SYC = {"buddies":{"pip":"<g><ellipse cx=\"60\" cy=\"111\" rx=\"32\" ry=
       return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c];
     });
   }
+  // "Time for A trip to the park" reads badly, so a leading article is lower-cased after "Time for".
+  function afterTimeFor(reward) {
+    return /^(A|An|The|Some|Our|My) /.test(reward) ? reward.charAt(0).toLowerCase() + reward.slice(1) : reward;
+  }
+
   function buddySvg(kind, cls) {
     return '<svg class="' + (cls || "") + '" viewBox="0 0 120 120" aria-hidden="true">' + D.buddies[kind] + "</svg>";
   }
@@ -88,7 +93,7 @@ window.__SYC = {"buddies":{"pip":"<g><ellipse cx=\"60\" cy=\"111\" rx=\"32\" ry=
       var star = i % 5 === 0;
       html += '<div class="reward-dot' + (star ? " is-star" : "") + '"><span>' + i + "</span></div>";
     }
-    html += '</div><div class="reward-prize">' + buddySvg(s.buddy, "prize-buddy") + "<div><strong>You did it!</strong><span>Time for " + esc(s.reward.trim() || "your reward") + "</span></div></div>";
+    html += '</div><div class="reward-prize">' + buddySvg(s.buddy, "prize-buddy") + "<div><strong>You did it!</strong><span>Time for " + esc(afterTimeFor(s.reward.trim()) || "your reward") + "</span></div></div>";
     html += '<div class="sheet-foot">' + footer(t) + "</div></div>";
     return html;
   }
