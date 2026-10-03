@@ -29,7 +29,7 @@
 .theme-pick [aria-checked="true"] { box-shadow: 0 0 0 3px var(--ink); }
 .seg { display: flex; flex-wrap: wrap; gap: 6px; }
 .seg button { min-height: 44px; padding: 0 14px; border: 2px solid var(--line); border-radius: 12px; background: #fff; font-weight: 800; }
-.seg [aria-checked="true"] { border-color: var(--tangerine); background: var(--tangerine); color: #fff; }
+.seg [aria-checked="true"] { border-color: #c2410c; background: #c2410c; color: #fff; }
 .chore-pick { display: flex; flex-wrap: wrap; gap: 6px; }
 .chore-pick button { display: inline-flex; align-items: center; gap: 6px; min-height: 40px; padding: 6px 10px; border: 2px solid var(--line); border-radius: 999px; background: #fff; font-size: 14px; font-weight: 800; color: var(--muted); }
 .chore-pick svg { width: 18px; height: 18px; }

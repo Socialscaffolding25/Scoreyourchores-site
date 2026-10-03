@@ -58,7 +58,7 @@ window.__SYC = {"buddies":{"pip":"<g><ellipse cx=\"60\" cy=\"111\" rx=\"32\" ry=
       '<div class="sheet sheet-landscape" style="--strong:' + t.strong + ";--main:" + t.main + ";--soft:" + t.soft + ";--page:" + t.page + ";--border:" + t.border + '">' +
       '<div class="sheet-head">' + buddySvg(s.buddy, "sheet-buddy") +
       '<div class="sheet-title"><p class="sheet-eyebrow">' + esc(buddyNames[s.buddy]) + " and " + (s.name.trim() ? esc(s.name.trim()) : "me") + "</p>" +
-      "<h2>" + possessive(s.name) + " " + esc(s.heading || "Quest Chart") + "</h2><p>" + esc(s.subline || "Finish a quest, add a tick or a sticker. Fill a whole row for a perfect week!") + "</p></div>" +
+      "<h2>" + possessive(s.name) + " " + esc(s.heading || "Quest Chart") + "</h2><p>" + esc(s.subline || "Finish a quest, add a tick or a sticker. Every tick counts!") + "</p></div>" +
       '<div class="sheet-week"><span>Week of</span><i></i></div></div>' +
       '<div class="sheet-grid" style="--rowh:' + rowH + 'mm"><div class="grid-corner">Quest</div>';
     days.forEach(function (d) {
@@ -182,7 +182,9 @@ window.__SYC = {"buddies":{"pip":"<g><ellipse cx=\"60\" cy=\"111\" rx=\"32\" ry=
     root.appendChild(previewWrap);
 
     function field(label, inner) {
-      return '<div class="field"><span class="field-label">' + label + "</span>" + inner + "</div>";
+      // Text boxes sit inside a <label> so screen readers announce the field name.
+      var tag = inner.indexOf("<input") === 0 ? "label" : "div";
+      return "<" + tag + ' class="field"><span class="field-label">' + label + "</span>" + inner + "</" + tag + ">";
     }
     function renderControls() {
       var html = field(
