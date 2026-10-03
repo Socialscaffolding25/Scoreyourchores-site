@@ -99,14 +99,12 @@ window.__SYC = {"buddies":{"pip":"<g><ellipse cx=\"60\" cy=\"111\" rx=\"32\" ry=
   }
 
   /* ------------------------------------------ prefilled from the app's link */
-  // The app opens this page with ?name=&buddy=&theme=&age=&chores=Title~icon|Title~icon so a child's chart is ready to print.
+  // The app opens this page with name, buddy, theme, age and chores (Title~icon|Title~icon) so a child's chart is ready
+  // to print. A script at the top of the page has already taken them out of the address; they arrive here in memory only.
   function applyLink(state, kind) {
-    var q;
-    try {
-      q = new URLSearchParams(window.location.search);
-    } catch (e) {
-      return;
-    }
+    var got = window.__SYC_LINK;
+    if (!got) return;
+    var q = { get: function (k) { return Object.prototype.hasOwnProperty.call(got, k) ? got[k] : null; } };
     var name = q.get("name");
     if (name) state.name = name.slice(0, 16);
     var buddy = q.get("buddy");
