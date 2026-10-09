@@ -2,7 +2,7 @@
 
 > Score Your Chores is a family chore chart and reward chart app for children aged about 3 to 12, made in the UK by Labii Reatum LTD. Each child wakes up their own cartoon Buddy and grows it by finishing chores ("quests"); parents approve finished quests in two taps and choose the rewards. It runs on one shared family phone with no child accounts, no ads and no tracking, and children never see prices. Free to start (two children, every core feature); an optional Plus subscription adds more children, photo proof, bonus outfits and past weekly results.
 
-Available on iPhone (App Store). An Android version is in Google Play review.
+Available on iPhone (App Store) and Android (Google Play: https://play.google.com/store/apps/details?id=com.scoreyourchores.app).
 
 ## Key facts
 - Works on one shared family phone; each child has their own card and Buddy.
