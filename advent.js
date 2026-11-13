@@ -22,7 +22,7 @@
         "Make someone a card", "Help lay the table", "Say three kind things", "Tidy up without being asked",
         "Share a toy or game", "Draw a picture for a neighbour", "Help make breakfast", "Give someone a compliment",
         "Pick toys for the charity shop", "Read a story to someone", "Put out food for the birds", "Help with the washing up",
-        "Write a thank you note", "Make someone laugh", "Help wrap a present", "Call a grandparent",
+        "Write a thank you note", "Make someone laugh", "Help wrap a present", "Call someone special",
         "Hold the door for someone", "Tidy your bedroom", "Make a paper snowflake", "Let someone else choose",
         "Help with the Christmas baking", "Thank a teacher or helper", "Put out the crackers", "Give the biggest hug",
       ],
@@ -30,8 +30,8 @@
     little: {
       label: "For little ones (3 to 5)",
       acts: [
-        "Give someone a hug", "Put your toys away", "Draw a picture for Grandma", "Say thank you three times",
-        "Share your snack", "Help feed the pet", "Hang a bauble on the tree", "Shoes by the door",
+        "Give someone a hug", "Put your toys away", "Draw a picture for someone", "Say thank you three times",
+        "Share your snack", "Make your bed", "Hang a bauble on the tree", "Shoes by the door",
         "Help water the plants", "Make a card for a friend", "Tell someone you love them", "Help pair the socks",
         "Pick a toy to give away", "Help lay the table", "Sing a song for someone", "Put your coat on the hook",
         "Help stir the baking", "Wave to a neighbour", "Clothes in the basket", "Say sorry and make up",
@@ -78,7 +78,7 @@
     });
     html +=
       '</div><div class="sheet-foot"><div class="sheet-brand"><div class="sheet-qr">' + D.qr + "</div><div><strong>Made with Score Your Chores</strong>" +
-      "<span>The free chore chart app for " + (D.androidLive ? "iPhone and Android" : "iPhone") + ". Scan to get it, or visit scoreyourchores.com</span></div></div></div></div>";
+      "<span>For grown-ups: a free family chore app for " + (D.androidLive ? "iPhone and Android" : "iPhone") + ". scoreyourchores.com</span></div></div></div></div>";
     return html;
   }
 
@@ -97,7 +97,7 @@
     return "<" + tag + ' class="field"><span class="field-label">' + label + "</span>" + inner + "</" + tag + ">";
   }
   function renderControls() {
-    var html = field("Child’s name", '<input type="text" maxlength="16" autocomplete="off" data-k="name" placeholder="e.g. Mia" value="' + esc(state.name) + '" />');
+    var html = field("Child’s name", '<input type="text" maxlength="22" autocomplete="off" data-k="name" placeholder="e.g. Mia" value="' + esc(state.name) + '" />');
     html += field(
       "Pick a Buddy",
       '<div class="buddy-pick" role="radiogroup" aria-label="Buddy">' +

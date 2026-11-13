@@ -45,7 +45,7 @@ window.__SYC = {"buddies":{"pip":"<g><ellipse cx=\"60\" cy=\"111\" rx=\"32\" ry=
   function footer(t) {
     return (
       '<div class="sheet-brand"><div class="sheet-qr">' + D.qr + '</div><div><strong>Made with Score Your Chores</strong>' +
-      "<span>The free chore chart app for " + (D.androidLive ? "iPhone and Android" : "iPhone") + ". Scan to get it, or visit scoreyourchores.com</span></div></div>"
+      "<span>For grown-ups: a free family chore app for " + (D.androidLive ? "iPhone and Android" : "iPhone") + ". scoreyourchores.com</span></div></div>"
     );
   }
 

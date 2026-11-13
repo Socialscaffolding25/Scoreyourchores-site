@@ -37,11 +37,11 @@
     ["mission", "Today’s mission: let someone else go first."],
     [SPOT, "I spotted you", "Wow!"],
     ["mission", "Today’s mission: help with the Christmas baking or cooking."],
-    ["mission", "Today’s mission: wave or call someone you miss."],
+    ["mission", "Today’s mission: make a card for someone special."],
     [SPOT, "I spotted you", "My heart is glowing."],
     ["mission", "Today’s mission: put your toys away before bed."],
     [SPOT, "I spotted you", "Only two more sleeps!"],
-    ["bye", "It’s Christmas Eve! Thank you for a month of kindness, {name}. I’ll keep spotting good things all year."],
+    ["bye", "It’s Christmas Eve! Thank you for a month of kindness, {name}. Happy Christmas!"],
   ];
   var state = { name: "", buddy: root.getAttribute("data-buddy") || "twinkle", theme: root.getAttribute("data-theme") || "bubblegum" };
 
@@ -76,7 +76,7 @@
     out.push(
       '<div class="sheet sheet-portrait kb-sheet" style="' + vars(t) + '">' +
         '<p class="kb-howto">Cut along the dotted line, fold along the middle and stand your Buddy on a shelf.</p>' +
-        '<div class="kb-tent"><div class="kb-panel kb-back"><p class="kb-hi">Hello! I’m ' + esc(b) + ",</p><p class=\"kb-big\">" + possessive() +
+        '<div class="kb-tent"><div class="kb-panel kb-back"><p class="kb-hi">Hello! I’m ' + esc(b) + ",</p><p class=\"kb-big\">" + (state.name.trim() ? possessive() : "your") +
         " Kindness Buddy.</p><p>I only notice the good things.</p></div>" +
         '<div class="kb-fold"><span>fold</span></div>' +
         '<div class="kb-panel kb-front">' + buddySvg(state.buddy, "kb-buddy") + '<p class="kb-banner">' + possessive() + " Kindness Buddy</p></div></div></div>"
@@ -129,7 +129,7 @@
     return "<" + tag + ' class="field"><span class="field-label">' + label + "</span>" + inner + "</" + tag + ">";
   }
   function renderControls() {
-    var html = field("Child’s name", '<input type="text" maxlength="16" autocomplete="off" data-k="name" placeholder="e.g. Mia" value="' + esc(state.name) + '" />');
+    var html = field("Child’s name", '<input type="text" maxlength="22" autocomplete="off" data-k="name" placeholder="e.g. Mia" value="' + esc(state.name) + '" />');
     html += field(
       "Pick a Buddy",
       '<div class="buddy-pick" role="radiogroup" aria-label="Buddy">' +
