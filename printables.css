@@ -40,6 +40,8 @@
 .add-chore button:disabled { opacity: 0.4; }
 .print-btn { justify-content: center; border: 0; font-size: 17px; min-height: 56px; }
 .maker-note { color: var(--muted); font-size: 13.5px; font-weight: 700; line-height: 1.5; }
+.maker-inapp { padding: 10px 12px; border-radius: 12px; background: #FFF4D6; color: #5E4500; }
+.maker-inapp strong { color: #3D2D00; }
 
 /* ---------------------------------------------------------------- sheet (printed page) */
 .sheet { box-sizing: border-box; display: flex; flex-direction: column; gap: 5mm; padding: 11mm 12mm 9mm; background: var(--page); color: #231b3d; font-family: Figtree, system-ui, sans-serif; -webkit-print-color-adjust: exact; print-color-adjust: exact; }

@@ -5,6 +5,11 @@
   var D = window.__SYC;
   var root = document.querySelector("[data-kindness-buddy]");
   if (!D || !root) return;
+  // data-mode="notes" prints only the 24 notes, signed by whoever the family chooses (an elf, a Buddy, any December visitor).
+  var notesOnly = root.getAttribute("data-mode") === "notes";
+  // Facebook and Instagram open links in their own browser, where printing often does nothing.
+  var inApp = /FBAN|FBAV|FB_IAB|FBIOS|Instagram|Messenger/i.test(navigator.userAgent || "");
+  var inAppNote = '<p class="maker-note maker-inapp"><strong>Opened from Facebook or Instagram?</strong> Printing may not work inside the app. Tap the ••• menu at the top and open this page in your browser, then print.</p>';
 
   var themes = {
     bubblegum: { name: "Bubblegum", strong: "#C92F7C", main: "#F4579E", soft: "#FFE0F0", page: "#FFF0F7", border: "#F7D3E5" },
@@ -43,7 +48,7 @@
     [SPOT, "I spotted you", "Only two more sleeps!"],
     ["bye", "It’s Christmas Eve! Thank you for a month of kindness, {name}. Happy Christmas!"],
   ];
-  var state = { name: "", buddy: root.getAttribute("data-buddy") || "twinkle", theme: root.getAttribute("data-theme") || "bubblegum" };
+  var state = { name: "", from: "", buddy: root.getAttribute("data-buddy") || "twinkle", theme: root.getAttribute("data-theme") || "bubblegum" };
 
   function esc(text) {
     return String(text).replace(/[&<>"']/g, function (c) {
@@ -67,11 +72,20 @@
   function fill(text) {
     return esc(text).replace("{name}", nameOr("friend"));
   }
+  function signer() {
+    if (!notesOnly) return esc(buddyNames[state.buddy]);
+    return state.from.trim() ? esc(state.from.trim()) : "your elf";
+  }
+  function noteIcon() {
+    if (!notesOnly) return buddySvg(state.buddy, "kb-mini");
+    return '<svg class="kb-mini" viewBox="0 0 24 24" aria-hidden="true"><path d="' + D.icons.star + '" style="fill:var(--main);stroke:var(--strong)" stroke-width="1.4" stroke-linejoin="round"/></svg>';
+  }
 
   function sheets() {
     var t = themes[state.theme];
     var b = buddyNames[state.buddy];
     var out = [];
+    if (!notesOnly) {
     // 1. The stand-up Buddy: a tent card. The top half is upside down so it reads the right way round once folded.
     out.push(
       '<div class="sheet sheet-portrait kb-sheet" style="' + vars(t) + '">' +
@@ -99,17 +113,20 @@
         '<div class="kb-app"><div class="sheet-qr">' + D.qr + "</div><p><strong>Keep it going after Christmas.</strong> In the free Score Your Chores app, each child picks their own Buddy that grows with every quest, and points go towards rewards you choose. For " +
         (D.androidLive ? "iPhone and Android" : "iPhone") + " at scoreyourchores.com</p></div></div></div>"
     );
+    }
     // 3 and 4. Twelve notes a page.
     for (var p = 0; p < 2; p++) {
       var html = '<div class="sheet sheet-portrait kb-sheet" style="' + vars(t) + '"><div class="kb-notes">';
       for (var i = p * 12; i < p * 12 + 12; i++) {
         var n = notes[i];
-        html += '<div class="kb-note"><div class="kb-note-head"><b>' + (i + 1) + "</b><span>December</span>" + buddySvg(state.buddy, "kb-mini") + "</div>";
+        html += '<div class="kb-note"><div class="kb-note-head"><b>' + (i + 1) + "</b><span>December</span>" + noteIcon() + "</div>";
         if (n[0] === SPOT) html += '<p>' + esc(n[1]) + '</p><i class="kb-line"></i><i class="kb-line"></i><p class="kb-after">' + esc(n[2]) + "</p>";
-        else html += "<p" + (n[0] === "mission" ? ' class="kb-mission"' : "") + ">" + fill(n[1]) + "</p>";
-        html += '<p class="kb-from">' + esc(b) + "</p></div>";
+        else html += "<p" + (n[0] === "mission" ? ' class="kb-mission"' : "") + ">" + fill(notesOnly && i === 0 ? "Hello {name}! This year I’m looking out for kind things. I think I’ll find lots." : n[1]) + "</p>";
+        html += '<p class="kb-from">' + signer() + "</p></div>";
       }
-      out.push(html + "</div></div>");
+      html += "</div>";
+      if (notesOnly) html += '<p class="kb-foot"><strong>Made with Score Your Chores.</strong> For grown-ups: more free printables and a family chore app at scoreyourchores.com</p>';
+      out.push(html + "</div>");
     }
     return out;
   }
@@ -130,7 +147,8 @@
   }
   function renderControls() {
     var html = field("Child’s name", '<input type="text" maxlength="22" autocomplete="off" data-k="name" placeholder="e.g. Mia" value="' + esc(state.name) + '" />');
-    html += field(
+    if (notesOnly) html += field("Who signs the notes?", '<input type="text" maxlength="22" autocomplete="off" data-k="from" placeholder="e.g. Jingle" value="' + esc(state.from) + '" />');
+    if (!notesOnly) html += field(
       "Pick a Buddy",
       '<div class="buddy-pick" role="radiogroup" aria-label="Buddy">' +
         Object.keys(buddyNames).map(function (k) {
@@ -144,8 +162,14 @@
           return '<button type="button" role="radio" aria-checked="' + (state.theme === id) + '" aria-label="' + themes[id].name + '" data-theme="' + id + '" style="--sw:' + themes[id].main + '"></button>';
         }).join("") + "</div>"
     );
-    html += '<button type="button" class="button primary print-btn" data-print>Print the kit (4 pages)</button>';
-    html += '<p class="maker-note">Free, no sign up. Prints on A4: the stand-up Buddy, its letter and 24 notes. Choose “Save as PDF” in the print window to keep a copy.</p>';
+    if (notesOnly) {
+      html += '<button type="button" class="button primary print-btn" data-print>Print the notes (2 pages)</button>';
+      html += '<p class="maker-note">Free, no sign up. Prints on A4: 24 notes, 12 to a page. Leave “Who signs the notes?” blank to sign them “your elf”. Choose “Save as PDF” in the print window to keep a copy.</p>';
+    } else {
+      html += '<button type="button" class="button primary print-btn" data-print>Print the kit (4 pages)</button>';
+      html += '<p class="maker-note">Free, no sign up. Prints on A4: the stand-up Buddy, its letter and 24 notes. Choose “Save as PDF” in the print window to keep a copy.</p>';
+    }
+    if (inApp) html += inAppNote;
     controls.innerHTML = html;
   }
   function fit() {

@@ -5,6 +5,9 @@
   var D = window.__SYC;
   var root = document.querySelector("[data-advent]");
   if (!D || !root) return;
+  // Facebook and Instagram open links in their own browser, where printing often does nothing.
+  var inApp = /FBAN|FBAV|FB_IAB|FBIOS|Instagram|Messenger/i.test(navigator.userAgent || "");
+  var inAppNote = '<p class="maker-note maker-inapp"><strong>Opened from Facebook or Instagram?</strong> Printing may not work inside the app. Tap the ••• menu at the top and open this page in your browser, then print.</p>';
 
   var themes = {
     bubblegum: { name: "Bubblegum", strong: "#C92F7C", main: "#F4579E", soft: "#FFE0F0", page: "#FFF0F7", border: "#F7D3E5" },
@@ -130,6 +133,7 @@
     );
     html += '<button type="button" class="button primary print-btn" data-print>Print or save as PDF</button>';
     html += '<p class="maker-note">Free, no sign up. Prints on A4. Choose “Save as PDF” in the print window to keep a copy.</p>';
+    if (inApp) html += inAppNote;
     controls.innerHTML = html;
   }
   function fit() {
