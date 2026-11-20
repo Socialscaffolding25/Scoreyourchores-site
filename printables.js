@@ -22,8 +22,13 @@ window.__SYC = {"buddies":{"pip":"<g><ellipse cx=\"60\" cy=\"111\" rx=\"32\" ry=
     });
   }
   // "Time for A trip to the park" reads badly, so a leading article is lower-cased after "Time for".
-  function afterTimeFor(reward) {
-    return /^(A|An|The|Some|Our|My) /.test(reward) ? reward.charAt(0).toLowerCase() + reward.slice(1) : reward;
+  // Rewards that start with a verb ("Choose the Christmas film") read as "Time to choose the Christmas film".
+  var REWARD_VERBS = /^(Choose|Pick|Put|Bake|Stay|Make|Write|Go|Have|Watch|Play|Visit|Build|Get|Plan|Help|Take|Do|Skip|Sleep|Decorate|See|Read|Cook|Sit|Use|Paint|Draw|Ride|Swim|Camp|Feed|Grow|Invite|Wear|Decide|Learn|Teach|Bring|Call|Eat|Listen|Dance|Sing) /i;
+  var REWARD_NOUNS = /^(Play|Watch|Dance|Swim|Paint|Draw|Camp|Ride|Sing|Cook|Bake|Sleep) (date|party|class|classes|lesson|lessons|set|kit|day|session|night|trip|over|out)\b/i;
+  function rewardLine(reward) {
+    if (!reward) return "Time for your reward";
+    if (REWARD_VERBS.test(reward) && !REWARD_NOUNS.test(reward)) return "Time to " + reward.charAt(0).toLowerCase() + reward.slice(1);
+    return "Time for " + (/^(a|an|the|some|our|my) /i.test(reward) ? reward.charAt(0).toLowerCase() + reward.slice(1) : reward);
   }
 
   function buddySvg(kind, cls) {
@@ -93,7 +98,7 @@ window.__SYC = {"buddies":{"pip":"<g><ellipse cx=\"60\" cy=\"111\" rx=\"32\" ry=
       var star = i % 5 === 0;
       html += '<div class="reward-dot' + (star ? " is-star" : "") + '"><span>' + i + "</span></div>";
     }
-    html += '</div><div class="reward-prize">' + buddySvg(s.buddy, "prize-buddy") + "<div><strong>You did it!</strong><span>Time for " + esc(afterTimeFor(s.reward.trim()) || "your reward") + "</span></div></div>";
+    html += '</div><div class="reward-prize">' + buddySvg(s.buddy, "prize-buddy") + "<div><strong>You did it!</strong><span>" + esc(rewardLine(s.reward.trim())) + "</span></div></div>";
     html += '<div class="sheet-foot">' + footer(t) + "</div></div>";
     return html;
   }
